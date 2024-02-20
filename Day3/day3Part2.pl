@@ -175,7 +175,6 @@ while(<FH>){
                 }
             }
         }
-        print "Value1: $val1 and Value2: $val2\n";
         $total = $total + $val1 * $val2; 
     }
     $lineNum = $lineNum + 1; 
