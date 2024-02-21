@@ -1,7 +1,7 @@
 use warnings;
 use strict;
 
-my $filename = "smallcards.txt";
+my $filename = "cards.txt";
 open(FH, '<', $filename);
 
 my $total_points;
@@ -9,12 +9,39 @@ my $points;
 
 my @winningNums;
 my @nums;
-my $string; 
-my @numbers;
+
+my $tempString1;
+my $tempString2; 
 
 while(<FH>){
-    @nums = ($_ =~ m/:(\d+)/g);
-    print "nums: @nums\n";
+
+    $points = -1;
+
+    #cut larger string into stirngs of just one side of nums
+    ($tempString1) = $_ =~ m/:(.*?)\|/;
+    ($tempString2) = $_ =~ m/\|(.*?)\n/;
+
+    #store nums into arrays
+    @nums = ($tempString1 =~ m/\d+/g);
+    @winningNums = ($tempString2 =~ m/\d+/g);
+
+    #count matches
+    for(my $i = 0; $i < scalar(@nums); $i++){
+        for(my $j = 0; $j < scalar(@winningNums); $j++){
+            if ($nums[$i] == $winningNums[$j]){
+                $points++; 
+            }
+        }
+    }
+
+    #add to total
+    if($points != -1){
+        $total_points = $total_points + (2**$points);
+    }
+    print "total: $total_points\n";
 }
+
+print "\ntotal: $total_points\n";
+
 
 close(FH);
