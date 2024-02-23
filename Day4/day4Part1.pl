@@ -4,7 +4,7 @@ use strict;
 my $filename = "cards.txt";
 open(FH, '<', $filename);
 
-my $total_points;
+my $total_points = 0;
 my $points; 
 
 my @winningNums;
@@ -38,10 +38,9 @@ while(<FH>){
     if($points != -1){
         $total_points = $total_points + (2**$points);
     }
-    print "total: $total_points\n";
 }
 
-print "\ntotal: $total_points\n";
+print "total: $total_points\n";
 
 
 close(FH);
