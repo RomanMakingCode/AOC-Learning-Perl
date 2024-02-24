@@ -5,6 +5,7 @@ my $filename = "farmMap.txt";
 open(FH,'<',$filename);
 
 my @seeds;
+my @parse;
 my $seedStrings;
 my $line = 0;
 my @shell; 
@@ -16,9 +17,12 @@ while(<FH>){
     #just want this to happen for the first line
     if($line == 0){
         ($seedStrings) = ($_ =~ m/seeds:\s+(\d+(?:\s+\d+)*)/);
-        (@seeds) = ($seedStrings =~ m/(\d+)/g);
-        for (my $i = 0; $i < scalar(@seeds); $i++){
-            push(@unchanged, 0);
+        (@parse) = ($seedStrings =~ m/(\d+)/g);
+        for (my $i = 0; $i < scalar(@parse); $i = $i + 2){
+            for (my $j = 0; $j < $parse[$i+1]; $j++){
+                push(@unchanged, 0);
+                push(@seeds, $j + $parse[$i]);
+            }
         }
     } else {
         #if new section
