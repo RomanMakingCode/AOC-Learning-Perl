@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-my $filename = "farmMap.txt";
+my $filename = "farming.txt";
 open(FH,'<',$filename);
 
 my @seeds;
